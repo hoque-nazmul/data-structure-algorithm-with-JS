@@ -1,6 +1,6 @@
 // Stack is LIFO (Last In First Out) data structure which principle is the last element added to the Stack will be the first element removed from the Stack. Actually, we can do two things using Stack. Firstly, we can add data at the last to the Stack which is known as push, and secondly, we can remove last added data from the Stack which is known as pop.
 
-// Array Implementation
+// Building a Stack with an Array
 const stack = [];
 
 stack.push(42);
@@ -9,81 +9,42 @@ console.log(stack); // expected output: [ 42 ]
 stack.push(22);
 console.log(stack); // expected output: [ 42, 22 ]
 
-stack.push(10);
-console.log(stack); // expected output: [ 42, 22, 10 ]
-
-//N.B. everytimes push added data at the last position to the stack array.
-
-stack.pop();
-console.log(stack); // expected output: [ 42, 22 ]
-
 stack.pop();
 console.log(stack); // expected output: [ 42 ]
 
-console.log("Created Stack Data Structure");
-class Node {
-    constructor(value){
-        this.value = value;
-        this.next = null;
-    }
-}
+//N.B. Last Added 22 element is First Out.
 
+// Building a Stack with OOP
 class Stack {
-    constructor(){
-        this.first = null;
-        this.last = null;
-        this.size = 0;
+    constructor () {
+        this.stack = [];
     }
-    push(val){
-        var newNode = new Node(val);
-        if(!this.first){
-            this.first = newNode;
-            this.last = newNode;
-        } else {
-            var temp = this.first;
-            this.first = newNode;
-            this.first.next = temp;
-        }
-        return ++this.size;
+    push (value) {
+        this.stack.push(value);
     }
-    pop(){
-        if(!this.first) return null;
-        var temp = this.first;
-        if(this.first === this.last){
-            this.last = null;
-        }
-        this.first = this.first.next;
-        this.size--;
-        return temp.value;
+    pop () {
+        return this.stack.pop();
     }
+    // peek() is used for showing the last element of the Queue.
+    // If you want, you can skip it.
+    peek () {
+        return this.stack[ this.stack.length - 1 ]
+    } 
 }
-
 const myStack = new Stack();
-myStack.push(32);
-console.log(myStack);
 
-myStack.push(22);
-console.log(myStack);
+myStack.push(55);
+console.log(myStack); // expected output: Stack { stack: [ 55 ] }
 
+myStack.push(66);
+console.log(myStack); //expected output: Stack Stack { stack: [ 55, 66 ] }
 
 myStack.pop();
-console.log(myStack);
+console.log(myStack); // expected output: Stack { stack: [ 55 ] }
 
-/*
-    expected output: 
-    Stack {
-        first: Node { value: 32, next: null },
-        last: Node { value: 32, next: null },
-        size: 1
-    }
-    Stack {
-        first: Node { value: 22, next: Node { value: 32, next: null } },
-        last: Node { value: 32, next: null },
-        size: 2
-    }
-    Stack {
-        first: Node { value: 32, next: null },
-        last: Node { value: 32, next: null },
-        size: 1
-    }
-*/
+//N.B. Last Added 66 element is First Out.
+
+
+
+
+
